@@ -1,5 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+// const employee = require('./lib/employee');
+const manager = require('./lib/manager');
+const { Engineer,newEngineers} = require('./lib/engineer');
+const intern = require('./lib/intern');
 
 const generateHTML = (answers) =>
   `<!DOCTYPE html>
@@ -35,106 +39,15 @@ const generateHTML = (answers) =>
   
 `;
 
-const initialQuestions = [
-    {
-    type: 'input',
-    name: 'name',
-    message: `What is the team manager's name?`,
-    },
-    {
-    type: 'input',
-    name: 'id',
-    message: `What is the team manager's id?`,
-    },
-    {
-    type: 'input',
-    name: 'email',
-    message: `What is the team manager's email?`,
-    },
-    {
-    type: 'input',
-    name: 'office',
-    message: `What is the team manager's office number?`,
-    },
-    {
-    type: 'list',
-    name: 'newMember',
-    choices: ['Engineer', 'Intern', 'I do not want to add any more team members.'],
-    message: 'Which type of team member would you like to add?',
-    },
-];
 
-const engineerQuestions = [
-    {
-    type: 'input',
-    name: 'name',
-    message: `What is the team manager's name?`,
-    },
-    {
-    type: 'input',
-    name: 'id',
-    message: `What is the team manager's id?`,
-    },
-    {
-    type: 'input',
-    name: 'email',
-    message: `What is the team manager's email?`,
-    },
-    {
-    type: 'input',
-    name: 'github',
-    message: `What is the engineer's Github username?`,
-    },
-    {
-    type: 'list',
-    name: 'newMember',
-    choices: ['Engineer', 'Intern', 'I do not want to add any more team members.'],
-    message: 'Which type of team member would you like to add?',
-    },
-];
-
-const internQuestions = [
-    {
-    type: 'input',
-    name: 'name',
-    message: `What is the team manager's name?`,
-    },
-    {
-    type: 'input',
-    name: 'id',
-    message: `What is the team manager's id?`,
-    },
-    {
-    type: 'input',
-    name: 'email',
-    message: `What is the team manager's email?`,
-    },
-    {
-    type: 'input',
-    name: 'school',
-    message: `What is the intern's school?`,
-    },
-    {
-    type: 'list',
-    name: 'newMember',
-    choices: ['Engineer', 'Intern', 'I do not want to add any more team members.'],
-    message: 'Which type of team member would you like to add?',
-    },
-];
-    
-// function endTeam (choice) {
-//     while(choice !== '')
-// }
+// function init() {
 
 
-
-
-function init() {
-
-    inquirer
-    .prompt(initialQuestions)
-    .then((answers) => {
-          console.log(answers)
+//    inquirer.start();
+    // inquirer
+    // .prompt(initialQuestions)
+    // .then((answers) => {
+    //       console.log(answers)
         //get the choice from answers
         //call a function that will prompt the next set of questions
 
@@ -143,7 +56,57 @@ function init() {
         // fs.writeFile('dist/index.html', htmlPageContent, (err) =>
         // err ? console.log(err) : console.log('Successfully created index.html!')
         // );
-    }); 
-}
+    // }); 
+// }
 
-init();
+// init();
+
+// function init(){
+//   console.log('Build your team!');
+// }
+// init();
+
+const initialQuestions = [
+  {
+  type: 'input',
+  name: 'name',
+  message: `What is the team manager's name?`,
+  },
+  {
+  type: 'input',
+  name: 'id',
+  message: `What is the team manager's id?`,
+  },
+  {
+  type: 'input',    
+  name: 'email',
+  message: `What is the team manager's email?`,
+  },
+  {
+  type: 'input',
+  name: 'officeNo',
+  message: `What is the team manager's office number?`,
+  },
+  {
+  type: 'list',
+  name: 'newMember',
+  choices: ['Engineer', 'Intern', 'I do not want to add any more team members.'],
+  message: 'Which type of team member would you like to add?',
+  },
+];
+
+function init(){
+  inquirer.prompt(initialQuestions)
+  .then(answers => {
+      let b = new manager(answers.name, answers.id, answers.email, answers.officeNo);
+      if(answers.newMember === 'Engineer'){
+        newEngineers();
+        let c  = Engineer.newEngineer;
+
+      }
+
+  })
+
+  
+}
+ init();
