@@ -1,9 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const employee = require('./lib/employee');
+const employee = require('./lib/employee');
 const manager = require('./lib/manager');
-const { Engineer,newEngineers} = require('./lib/engineer');
+const {newEngineer,newEngineers, listOfEngineers} = require('./lib/engineer');
 const intern = require('./lib/intern');
+
+const content = [];
 
 const generateHTML = (answers) =>
   `<!DOCTYPE html>
@@ -95,18 +97,15 @@ const initialQuestions = [
   },
 ];
 
-function init(){
+function init() {
   inquirer.prompt(initialQuestions)
   .then(answers => {
-      let b = new manager(answers.name, answers.id, answers.email, answers.officeNo);
+      const newManager = new manager(answers.name, answers.id, answers.email, answers.officeNo);
+      console.log(newManager);
       if(answers.newMember === 'Engineer'){
         newEngineers();
-        let c  = Engineer.newEngineer;
-
       }
-
   })
-
-  
 }
+
  init();

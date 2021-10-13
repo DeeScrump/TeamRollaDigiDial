@@ -22,8 +22,7 @@
   },
   "homepage": "https://github.com/DeeScrump/TeamRollaDigiDial#readme",
   "dependencies": {
-    "inquirer": "^8.2.0",
-    "prompt": "^1.2.0"
+    "inquirer": "^8.2.0"
   },
   "devDependencies": {
     "jest": "^27.2.5"
