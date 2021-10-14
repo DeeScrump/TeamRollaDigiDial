@@ -3,8 +3,6 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 var array = [];
 
-
-
 var header = 
 `
 <!DOCTYPE html>
@@ -25,7 +23,7 @@ var header =
     </div>
   </div>
 
-  <div class='card-group w-50 container-fluid'>
+  <div class='card-group container-fluid shadow-lg p-0 ' style='width: 15rem;'>
 
 `
 
@@ -35,51 +33,6 @@ var footer =
 </body>
 </html>
 `
-
-
-var main = ``
-
-
-
-
-
-// const generateHTML = (array) =>
-//   `<!DOCTYPE html>
-//   <html lang="en">
-//   <head>
-//     <meta charset="UTF-8">
-//     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-//     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
-//     <title>My Team Profile</title>
-//   </head>
-//   <body>
-//     <div class="jumbotron jumbotron-fluid bg-primary">
-//     <div class="container">
-//       <h1 class="display-4 text-center">My Team!</h1>
-//     </div>
-//   </div>
-  
-  
- 
-
-//   // <div class="card border" style="width: 18rem;">
-//   //   <div class="card-body p-0">
-//   //     <div class="card bg-danger">
-//   //     <h5 class="card-title bg-danger">${array[0].name}</h5>
-//   //     <h6 class="card-subtitle mb-2 text-muted">${array[0].newMember}</h6>
-//   //     </div>
-//   //     <ul class="list-group list-group-flush">
-//   //         <li class="list-group-item border-0">${array[0].key}:${array[0].id}</li>
-//   //         <li class="list-group-item border-0">${array[0].email}</li>
-//   //         <li class="list-group-item border-0">${array[0].office}</li>
-//   //     </ul>
-//   //   </div>
-//   // </div>
-  
-//   </body>
-//   </html>
-  
-// `;
 
 const engineerQuestions = [
   {
@@ -99,7 +52,7 @@ const engineerQuestions = [
   },
   {
   type: 'input',
-  name: 'github',
+  name: 'Github',
   message: `What is the employee's Github username?`,
   },
 ];
@@ -122,7 +75,7 @@ const internQuestions = [
   },
   {
   type: 'input',
-  name: 'school',
+  name: 'School',
   message: `What is the employee's school?`,
   },
 ];
@@ -145,7 +98,7 @@ const initialQuestions = [
   },
   {
   type: 'input',
-  name: 'officeNo',
+  name: 'OfficeNo',
   message: `What is the team manager's office number?`,
   },
  
@@ -159,7 +112,6 @@ const mchoice = [
     message: 'Which type of team member would you like to add?',
     },
 ]
-
 
 
 var count  = 0;
@@ -194,7 +146,6 @@ function init() {
         }else{
           
           console.log("Done adding members")
-          const htmlPageContent = generateHTML(array);
          
           console.log(array);
           var result = data(array);
@@ -203,7 +154,6 @@ function init() {
           fs.writeFile('dist/index.html',test, (err) =>
           err ? console.log(err) : console.log('Successfully created index.html!')
           );
-          // console.log(result)
         }
     }) 
    }
@@ -213,25 +163,52 @@ function init() {
 function data(array){
   var div = ""
   array.forEach(function(element){
-    var target = Object.values(element)
-    var last = target[target.length-2];
-    var re =   
-      `
-      <div class="card border" style="width: 18rem;">
-        <div class="card-body p-0">
-          <div class="card bg-danger">
-          <h5 class="card-title bg-danger">${element.name}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">${element.newMember}</h6>
+    if (element.newMember !== 'Engineer') {
+      var val = Object.values(element)
+      var key = Object.keys(element)
+      var last = val[val.length-2];
+      var git = key[3]
+      var re =   
+        `
+        <div class="card border" style="width: 18rem;">
+          <div class="card-body p-0">
+            <div class="card bg-danger">
+            <h5 class="card-title bg-danger">${element.name}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${element.newMember}</h6>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item border-0">Id: ${element.id}</li>
+                <li class="list-group-item border-0">Email: <a href="mailto:${element.email}">${element.email}</a></li>
+                <li class="list-group-item border-0">${git}: ${last}</li>
+            </ul>
           </div>
-          <ul class="list-group list-group-flush">
-              <li class="list-group-item border-0">Id: ${element.id}</li>
-              <li class="list-group-item border-0">Email: <a href="mailto:${element.email}">${element.email}</a></li>
-              <li class="list-group-item border-0">${last}</li>
-          </ul>
         </div>
-      </div>
       `
       div+=re;
+    } else {
+        var val = Object.values(element)
+        var key = Object.keys(element)
+        var last = val[val.length-2];
+        var git = key[3]
+        var re =   
+          `
+          <div class="card border" style="width: 18rem;">
+            <div class="card-body p-0">
+              <div class="card bg-danger">
+              <h5 class="card-title bg-danger">${element.name}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">${element.newMember}</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item border-0">Id: ${element.id}</li>
+                  <li class="list-group-item border-0">Email: <a href="mailto:${element.email}">${element.email}</a></li>
+                  <li class="list-group-item border-0">Github: <a href="http://github.com/${last}" target="_blank">${last}</a></li>
+              </ul>
+            </div>
+          </div>
+        `
+      div+=re;
+    }
+
   })
 
   return div;
