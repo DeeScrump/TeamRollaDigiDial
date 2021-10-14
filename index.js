@@ -1,11 +1,5 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const employee = require('./lib/employee');
-const manager = require('./lib/manager');
-const {newEngineer,newEngineers, listOfEngineers} = require('./lib/engineer');
-const intern = require('./lib/intern');
-
-const content = [];
 
 const generateHTML = (answers) =>
   `<!DOCTYPE html>
@@ -41,32 +35,57 @@ const generateHTML = (answers) =>
   
 `;
 
+const engineerQuestions = [
+  {
+  type: 'input',
+  name: 'name',
+  message: `What is the employee's name?`,
+  },
+  {
+  type: 'input',
+  name: 'id',
+  message: `What is the employee's id?`,
+  },
+  {
+  type: 'input',
+  name: 'email',
+  message: `What is the employee's email?`,
+  },
+  {
+  type: 'input',
+  name: 'github',
+  message: `What is the employee's Github username?`,
+  },
+];
 
-// function init() {
+const internQuestions = [
+  {
+  type: 'input',
+  name: 'name',
+  message: `What is the employee's name?`,
+  },
+  {
+  type: 'input',
+  name: 'id',
+  message: `What is the employee's id?`,
+  },
+  {
+  type: 'input',
+  name: 'email',
+  message: `What is the employee's email?`,
+  },
+  {
+  type: 'input',
+  name: 'school',
+  message: `What is the employee's school?`,
+  },
+  {
+    type: 'input',
+    name: 'role',
+    message: `What is the employee's role?`,
+  },
+];
 
-
-//    inquirer.start();
-    // inquirer
-    // .prompt(initialQuestions)
-    // .then((answers) => {
-    //       console.log(answers)
-        //get the choice from answers
-        //call a function that will prompt the next set of questions
-
-        // const htmlPageContent = generateHTML(answers);
-
-        // fs.writeFile('dist/index.html', htmlPageContent, (err) =>
-        // err ? console.log(err) : console.log('Successfully created index.html!')
-        // );
-    // }); 
-// }
-
-// init();
-
-// function init(){
-//   console.log('Build your team!');
-// }
-// init();
 
 const initialQuestions = [
   {
@@ -89,23 +108,36 @@ const initialQuestions = [
   name: 'officeNo',
   message: `What is the team manager's office number?`,
   },
-  {
-  type: 'list',
-  name: 'newMember',
-  choices: ['Engineer', 'Intern', 'I do not want to add any more team members.'],
-  message: 'Which type of team member would you like to add?',
-  },
+ 
 ];
+
+const mchoice = [
+  {
+    type: 'list',
+    name: 'newMember',
+    choices: ['Engineer', 'Intern', 'I do not want to add any more team members.'],
+    message: 'Which type of team member would you like to add?',
+    },
+]
+
+var array = []
 
 function init() {
   inquirer.prompt(initialQuestions)
-  .then(answers => {
-      const newManager = new manager(answers.name, answers.id, answers.email, answers.officeNo);
-      console.log(newManager);
-      if(answers.newMember === 'Engineer'){
-        newEngineers();
-      }
+  .then(answers =>{
+     array.push(answers); 
+     var manager_choice =  managerChoice();
+     if()
+  })
+  
+}
+
+// this function return the manager choice
+async function   managerChoice(){
+  inquirer.prompt(mchoice)
+  .then(answers =>{
+    return answers;
   })
 }
 
- init();
+init()
