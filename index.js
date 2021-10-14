@@ -2,7 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const generateHTML = (answers) =>
+const generateHTML = (array) =>
   `<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -17,17 +17,22 @@ const generateHTML = (answers) =>
       <h1 class="display-4 text-center">My Team!</h1>
     </div>
   </div>
-  
-  <div class="card border" style="width: 18rem;">
+  `
+  array.forEach(function(element){
+    for()
+  })
+  sdfasffdasdfasdfasdfsa
+
+  `<div class="card border" style="width: 18rem;">
     <div class="card-body p-0">
       <div class="card bg-danger">
-      <h5 class="card-title bg-danger">${answers.name}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
+      <h5 class="card-title bg-danger">${array[0].name}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">${array[0].newMember}</h6>
       </div>
       <ul class="list-group list-group-flush">
-          <li class="list-group-item border-0">${answers.id}</li>
-          <li class="list-group-item border-0">${answers.email}</li>
-          <li class="list-group-item border-0">${answers.office}</li>
+          <li class="list-group-item border-0">${array[0].key}:${array[0].id}</li>
+          <li class="list-group-item border-0">${array[0].email}</li>
+          <li class="list-group-item border-0">${array[0].office}</li>
       </ul>
     </div>
   </div>
@@ -120,10 +125,10 @@ var array = []
 var count  = 0;
 function init() {
    if(count == 0){
+    console.log('Start Building Your Team');
     inquirer.prompt(initialQuestions)
     .then(answers =>{
-      var role ={"newMember":"Manager"}
-      answers.push(role)
+      answers["newMember"] = 'Manager'
       array.push(answers)
       count++;
       init()
@@ -135,22 +140,25 @@ function init() {
         if(answers.newMember ==="Engineer"){
           inquirer.prompt(engineerQuestions)
           .then(answers =>{
-            var role ={"newMember":"Engineer"}
-            answers.push(role)
+            answers["newMember"] = 'Engineer'
             array.push(answers)
             init()
           })
         }else if(answers.newMember ==="Intern"){
           inquirer.prompt(internQuestions)
           .then(answers =>{
-            var role ={"newMember":"Intern"}
-            answers.push(role)
+            answers["newMember"] = 'Intern'
             array.push(answers)
             init()
           })
         }else{
           
           console.log("Done adding members")
+          // const htmlPageContent = generateHTML(array);
+
+          // fs.writeFile('dist/index.html', htmlPageContent, (err) =>
+          // err ? console.log(err) : console.log('Successfully created index.html!')
+          // );
           console.log(array);
         }
     }) 
