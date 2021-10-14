@@ -1,3 +1,4 @@
+// import inquirer from 'inquirer';
 const inquirer = require('inquirer');
 const fs = require('fs');
 
@@ -79,13 +80,7 @@ const internQuestions = [
   name: 'school',
   message: `What is the employee's school?`,
   },
-  {
-    type: 'input',
-    name: 'role',
-    message: `What is the employee's role?`,
-  },
 ];
-
 
 const initialQuestions = [
   {
@@ -122,22 +117,45 @@ const mchoice = [
 
 var array = []
 
+var count  = 0;
 function init() {
-  inquirer.prompt(initialQuestions)
-  .then(answers =>{
-     array.push(answers); 
-     var manager_choice =  managerChoice();
-     if()
-  })
+   if(count == 0){
+    inquirer.prompt(initialQuestions)
+    .then(answers =>{
+      var role ={"newMember":"Manager"}
+      answers.push(role)
+      array.push(answers)
+      count++;
+      init()
+    })
+   }
+   if(count > 0){
+    inquirer.prompt(mchoice)
+     .then(answers =>{
+        if(answers.newMember ==="Engineer"){
+          inquirer.prompt(engineerQuestions)
+          .then(answers =>{
+            var role ={"newMember":"Engineer"}
+            answers.push(role)
+            array.push(answers)
+            init()
+          })
+        }else if(answers.newMember ==="Intern"){
+          inquirer.prompt(internQuestions)
+          .then(answers =>{
+            var role ={"newMember":"Intern"}
+            answers.push(role)
+            array.push(answers)
+            init()
+          })
+        }else{
+          
+          console.log("Done adding members")
+          console.log(array);
+        }
+    }) 
+   }
   
-}
-
-// this function return the manager choice
-async function   managerChoice(){
-  inquirer.prompt(mchoice)
-  .then(answers =>{
-    return answers;
-  })
 }
 
 init()
