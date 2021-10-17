@@ -3,6 +3,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 var array = [];
 
+// generate top section of html page
 var header = 
 `
 <!DOCTYPE html>
@@ -23,10 +24,11 @@ var header =
     </div>
   </div>
 
-  <div class='card-group container-fluid shadow-lg p-0 ' style='width: 15rem;'>
+  <div class='card-group container-fluid shadow-lg p-0 ' style='width: 50rem;'>
 
 `
 
+// generated footer section of html page
 var footer = 
 `
   </div>
@@ -34,6 +36,7 @@ var footer =
 </html>
 `
 
+// list of question if employee is an engineer
 const engineerQuestions = [
   {
   type: 'input',
@@ -57,6 +60,7 @@ const engineerQuestions = [
   },
 ];
 
+// list of questions if employee is an intern
 const internQuestions = [
   {
   type: 'input',
@@ -80,6 +84,7 @@ const internQuestions = [
   },
 ];
 
+// initial list of questions which covers manager position
 const initialQuestions = [
   {
   type: 'input',
@@ -104,6 +109,7 @@ const initialQuestions = [
  
 ];
 
+// standard choice question to go back and forth between engineer and intern as next employee
 const mchoice = [
   {
     type: 'list',
@@ -113,7 +119,7 @@ const mchoice = [
     },
 ]
 
-
+// init function which starts the application with the initial set of questions, and based on response from final question (engineer/intern), cycles to add questions for the appropriate role.  Each set of question answers are added to a total 'answer' array for storage
 var count  = 0;
 function init() {
    if(count == 0){
@@ -160,6 +166,7 @@ function init() {
   
 }
 
+// function to sort through answer array and append additional html with the appropriate keys/values inject to build employee card
 function data(array){
   var div = ""
   array.forEach(function(element){
