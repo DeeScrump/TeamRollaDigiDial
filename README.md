@@ -24,9 +24,9 @@ What are the steps required to install your project? Provide a step-by-step desc
 Attached are screenshots of working site. Additionally, you will find a screencastify that shows the workings of the project.
 
 Please see screenshots attached
-![Screenshot of Site](dist\images\screenshot.png)
+![Screenshot of Site](./dist/images/screenshot.png)
 
-![Live Demo of Working Site](dist\images\teamrolladigidial.gif)
+![Live Demo of Working Site](./dist/images/teamrolladigidial.gif)
     
 ## Contributions
 The following persons assisted with this project.  If left blank, there were no other contributors.
