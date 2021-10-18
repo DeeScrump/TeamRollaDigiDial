@@ -27,8 +27,8 @@ Please see screenshots attached
     
 ## Contributions
 The following persons assisted with this project.  If left blank, there were no other contributors.
-- N/A
-- N/A
+- Github Link:    https://github.com/DeeScrump/TeamRollaDigiDial
+- Deployed Site:  https://deescrump.github.io/TeamRollaDigiDial/
 
 ## License
 © <2021> Dwight C Kornbluth II
